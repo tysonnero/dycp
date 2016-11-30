@@ -1,0 +1,14 @@
+# editorconfig.org
+root = true
+
+; 2-column tab indentation
+[*.js]
+indent_style = space
+indent_size = 2
+
+[*.{css,scss}]
+indent_style = space
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false
