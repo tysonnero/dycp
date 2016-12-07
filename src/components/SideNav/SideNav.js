@@ -10,10 +10,10 @@ class SideNav extends Component {
 
   render() {
     const { docked } = this.props;
-    const drawContainerStyle = { marginTop: 64 };
+    const drawerContainerStyle = { marginTop: 64 };
 
     return (
-      <Drawer docked={docked} containerStyle={drawContainerStyle}>
+      <Drawer docked={docked} containerStyle={drawerContainerStyle}>
         <Toolbar>
           <ToolbarGroup>
             <ToolbarTitle text="Options"/>

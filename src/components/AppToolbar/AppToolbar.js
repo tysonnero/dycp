@@ -9,18 +9,18 @@ class AppToolbar extends Component {
     onElementLeftClick: PropTypes.func.isRequired
   };
 
-  handleToggle = () => this.setState({ docked: !this.state.docked });
-
   render() {
     const { onElementLeftClick } = this.props;
 
     return (
-      <AppBar
-        title="<DYCP/>"
-        iconElementLeft={<IconButton onTouchTap={onElementLeftClick}><NavigationMenu /></IconButton>}
-        iconElementRight={<IconButton><ExpandMore /></IconButton>}
-        style={{ position: 'fixed' }}
-      />
+      <div>
+        <AppBar
+          title="<DYCP/>"
+          iconElementLeft={<IconButton onTouchTap={onElementLeftClick}><NavigationMenu /></IconButton>}
+          iconElementRight={<IconButton><ExpandMore /></IconButton>}
+          style={{ position: 'fixed' }}
+        />
+      </div>
     );
   }
 }
