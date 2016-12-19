@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux';
 import chores from './chores';
 
 /**
@@ -11,5 +12,6 @@ import chores from './chores';
  */
 
 export default combineReducers({
-  chores
+  chores,
+  routing: routerReducer
 });

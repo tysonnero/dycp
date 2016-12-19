@@ -1,0 +1,1 @@
+export const RECEIVE_CHORES = 'RECEIVE_CHORES';
