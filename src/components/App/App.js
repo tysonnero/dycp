@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import { AppToolbar, Content, SideNav } from '../index';
+import { AppToolbar, SideNav } from '../index';
 
 import './App.css';
 
@@ -21,7 +21,13 @@ class App extends Component {
         <div className="App">
           <AppToolbar onElementLeftClick={this.handleSidebarToggle}/>
           <SideNav docked={docked}/>
-          <Content sideNavDocked={docked}/>
+          <div style={{
+            paddingTop: 64,
+            marginLeft: docked ? 256 : 0,
+            transition: 'all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms'
+          }}>
+            {this.props.children}
+          </div>
         </div>
       </MuiThemeProvider>
     );

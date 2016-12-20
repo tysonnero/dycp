@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
+import { Link } from 'react-router'
 import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
 
 class SideNav extends Component {
@@ -19,7 +20,7 @@ class SideNav extends Component {
             <ToolbarTitle text="Options"/>
           </ToolbarGroup>
         </Toolbar>
-        <MenuItem>Menu Item</MenuItem>
+        <MenuItem primaryText="My Chores" containerElement={<Link to="/chores"/>}/>
         <MenuItem>Menu Item 2</MenuItem>
       </Drawer>
     );
