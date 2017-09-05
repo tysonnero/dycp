@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router, browserHistory } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
+import { ConnectedRouter } from 'react-router-redux';
+import createHistory from 'history/createBrowserHistory';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
-import configureStore from './store/configureStore';
-import routes from './routes';
+import { configureStore } from './store/configureStore';
+import AppContainer from './containers/app/AppContainer';
 
 import 'material-design-icons/iconfont/material-icons.css';
 import './index.css';
@@ -15,16 +15,16 @@ import './index.css';
 // http://stackoverflow.com/a/34015469/988941
 injectTapEventPlugin();
 
-const store = configureStore();
+const history = createHistory();
+const store = configureStore(history);
 
-// Create an enhanced history that syncs navigation events with the store
-const history = syncHistoryWithStore(browserHistory, store)
-
+/* eslint-disable react/jsx-filename-extension */
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={history}>
-      {routes()}
-    </Router>
+    {/* ConnectedRouter will use the store from Provider automatically */}
+    <ConnectedRouter history={history}>
+      <AppContainer />
+    </ConnectedRouter>
   </Provider>,
   document.getElementById('root')
 );

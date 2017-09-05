@@ -1,37 +1,53 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Route, Switch } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import { AppToolbar, SideNav } from '../index';
+import PrivateRoute from '../PrivateRoute/PrivateRoute';
+import { AppLoading, AppMain } from '../';
+import LoginContainer from '../../containers/login/LoginContainer';
 
 import './App.css';
 
-class App extends Component {
-
-  state = {
-    docked: true
+export default class App extends Component {
+  componentDidMount() {
+    this.removeOnAuthStateChanged = this.props.onAuthStateChanged();
   }
 
-  handleSidebarToggle = () => this.setState({ docked: !this.state.docked });
+  componentWillUnmount() {
+    this.removeOnAuthStateChanged()
+  }
 
   render() {
-    const { docked } = this.state;
+    const { isLoading, isLoggedIn } = this.props;
 
     return (
       <MuiThemeProvider>
         <div className="App">
-          <AppToolbar onElementLeftClick={this.handleSidebarToggle}/>
-          <SideNav docked={docked}/>
-          <div style={{
-            paddingTop: 64,
-            marginLeft: docked ? 256 : 0,
-            transition: 'all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms'
-          }}>
-            {this.props.children}
-          </div>
+          {isLoading ?
+            <AppLoading /> :
+            !isLoggedIn ? (
+              <Switch>
+                <Route path="/login" component={LoginContainer} />
+                <PrivateRoute authenticated={false} component={LoginContainer} />
+              </Switch>
+            ) : (
+              <AppMain
+                isLoggedIn={isLoggedIn}
+                onGetChores={this.props.onGetChores}
+                user={this.props.user} />
+            )}
+          }
         </div>
       </MuiThemeProvider>
     );
   }
 }
 
-export default App;
+App.propTypes = {
+  isLoading: PropTypes.bool,
+  isLoggedIn: PropTypes.bool,
+  onAuthStateChanged: PropTypes.func,
+  onGetChores: PropTypes.func,
+  user: PropTypes.object
+};

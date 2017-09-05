@@ -1,5 +1,8 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
+
+import auth from './auth';
+import user from './user';
 import chores from './chores';
 
 /**
@@ -12,6 +15,8 @@ import chores from './chores';
  */
 
 export default combineReducers({
+  auth,
+  user,
   chores,
   routing: routerReducer
 });
